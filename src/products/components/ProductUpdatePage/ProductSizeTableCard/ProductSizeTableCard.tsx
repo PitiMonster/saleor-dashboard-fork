@@ -14,7 +14,7 @@ import { useIntl } from "react-intl";
 import { getSizeParametersOptions } from "./consts";
 import { variantsStaticColumnsAdapter } from "./datagrid";
 import messages from "./messages";
-import { generateSizeTable, getError, getProductVariantClothingSizes } from "./utils";
+import { generateSizeTable, getProductVariantClothingSizes } from "./utils";
 
 type Props = {
   initSizeTable: TSizeTable;
@@ -106,9 +106,7 @@ type ProductSizeTableProps = {
 } & Pick<Props, "onChangeSizeTableData">;
 
 const ProductSizeTable: React.FC<ProductSizeTableProps> = ({
-  productName,
   sizeTable,
-  onRowClick,
   onChangeSizeTableData,
 }) => {
   const intl = useIntl();
@@ -127,9 +125,7 @@ const ProductSizeTable: React.FC<ProductSizeTableProps> = ({
     [sizeTable],
   );
 
-  const [columnSettings, setColumnSettings] = useStateFromProps<string[] | undefined>(
-    initialSettings,
-  );
+  const [columnSettings] = useStateFromProps<string[] | undefined>(initialSettings);
 
   const memoizedStaticColumns = React.useMemo(
     () =>

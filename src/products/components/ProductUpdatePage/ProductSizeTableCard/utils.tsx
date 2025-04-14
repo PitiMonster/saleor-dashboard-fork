@@ -42,7 +42,7 @@ export const mapSizePropertyToMessage = (sizeProperty: SizePropertyEnum, intl: I
   }
 };
 
-function errorMatchesColumn(error: ProductVariantListError, columnId: string): boolean {
+function errorMatchesColumn(_error: ProductVariantListError, _columnId: string): boolean {
   return false;
   // if (error.type === "channel") {
   //   return (

@@ -1,7 +1,7 @@
 import useStateFromProps from "@dashboard/hooks/useStateFromProps";
 import { addAtIndex, removeAtIndex } from "@dashboard/utils/lists";
 import { GridColumn } from "@glideapps/glide-data-grid";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { PersistedColumn } from "../persistance/persistedColumn";
 import { usePersistance } from "../persistance/usePersistance";
