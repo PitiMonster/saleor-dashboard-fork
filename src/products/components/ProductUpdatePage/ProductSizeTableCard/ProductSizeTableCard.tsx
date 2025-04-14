@@ -120,7 +120,7 @@ const ProductSizeTable: React.FC<ProductSizeTableProps> = ({
     () =>
       // eslint-disable-next-line no-extra-boolean-cast
       isTableLoaded
-        ? ["size", ...Object.keys(Object.values(sizeTable).filter(v => !!v)[0])]
+        ? ["size", ...Object.keys(Object.values(sizeTable).filter(v => !!v)[0] || {})]
         : undefined,
     [sizeTable],
   );
@@ -131,7 +131,7 @@ const ProductSizeTable: React.FC<ProductSizeTableProps> = ({
     () =>
       variantsStaticColumnsAdapter(
         intl,
-        isTableLoaded ? Object.keys(Object.values(sizeTable).filter(v => !!v)[0]) : [],
+        isTableLoaded ? Object.keys(Object.values(sizeTable).filter(v => !!v)[0] || {}) : [],
       ),
     [intl, isTableLoaded, sizeTable],
   );
@@ -155,7 +155,7 @@ const ProductSizeTable: React.FC<ProductSizeTableProps> = ({
               ([_, sizeRowData], index) => !!sizeRowData && !opts.removed.includes(index),
             )[row];
 
-      const value = change?.value ?? dataRow[1][columnId] ?? numberCellEmptyValue;
+      const value = change?.value ?? dataRow?.[1]?.[columnId] ?? numberCellEmptyValue;
 
       if (columnId === "size") {
         return readonlyTextCell(dataRow ? dataRow[0].toUpperCase() : "");

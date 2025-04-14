@@ -173,7 +173,7 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
     isMediaUrlModalVisible || false,
   );
   const [selectedCollections, setSelectedCollections] = useStateFromProps(
-    getChoices(maybe(() => product.collections, [])),
+    getChoices(maybe(() => product?.collections, [])),
   );
   const [selectedTaxClass, setSelectedTaxClass] = useStateFromProps(product?.taxClass?.name ?? "");
   const categories = getChoicesWithAncestors(categoryChoiceList);

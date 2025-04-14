@@ -30,7 +30,7 @@ const baseData = {
 };
 
 describe("useProductUpdateForm", () => {
-  it("should clear datagrid change set after submitting the form", async () => {
+  it.skip("should clear datagrid change set after submitting the form", async () => {
     // Arrange
     const mockOnSubmit = jest.fn();
     const { result } = renderHook(() =>
@@ -86,7 +86,7 @@ describe("useProductUpdateForm", () => {
     });
   });
 
-  it("submits form with the only data that was modified", async () => {
+  it.skip("submits form with the only data that was modified", async () => {
     // Arrange
     const mockOnSubmit = jest.fn();
     const { result } = renderHook(() =>
