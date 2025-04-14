@@ -1,4 +1,3 @@
-// @ts-strict-ignore
 import {
   extensionMountPoints,
   mapToMenuItemsForProductDetails,
@@ -63,9 +62,14 @@ import ProductVariants from "../ProductVariants";
 import ProductUpdateForm from "./form";
 import { messages } from "./messages";
 import ProductChannelsListingsDialog from "./ProductChannelsListingsDialog";
+import { ProductSizeTableCard, TSizeTable } from "./ProductSizeTableCard";
 import { ProductUpdateData, ProductUpdateHandlers, ProductUpdateSubmitData } from "./types";
 
-export interface ProductUpdatePageProps {
+interface StylkaProps {
+  sizeTable: TSizeTable;
+}
+
+export interface ProductUpdatePageProps extends StylkaProps {
   channels: ChannelFragment[];
   productId: string;
   channelsErrors: ProductChannelListingErrorFragment[];
@@ -159,6 +163,7 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
   refetch,
   onCloseDialog,
   onAttributeSelectBlur,
+  sizeTable,
 }) => {
   const intl = useIntl();
   const navigate = useNavigator();
@@ -228,6 +233,8 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
     path: productListPath,
   });
 
+  const isProductTypeClothes = product?.productType?.name === "Clothes";
+
   return (
     <ProductUpdateForm
       isSimpleProduct={isSimpleProduct}
@@ -250,6 +257,7 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
       assignReferencesAttributeId={assignReferencesAttributeId}
       disabled={disabled}
       refetch={refetch}
+      sizeTable={sizeTable}
     >
       {({ change, data, handlers, submit, isSaveDisabled, attributeRichTextGetters }) => {
         const availabilityCommonProps = {
@@ -330,6 +338,15 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
                   fetchMoreAttributeValues={fetchMoreAttributeValues}
                   onAttributeSelectBlur={onAttributeSelectBlur}
                   richTextGetters={attributeRichTextGetters}
+                />
+              )}
+              {isProductTypeClothes && (
+                <ProductSizeTableCard
+                  initSizeTable={sizeTable}
+                  productVariants={variants}
+                  sizeProperties={data.sizeProperties}
+                  onSizePropertiesChange={handlers.selectSizeProperties}
+                  onChangeSizeTableData={handlers.changeSizeTableData}
                 />
               )}
               <ProductVariants

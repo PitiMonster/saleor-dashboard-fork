@@ -1,7 +1,7 @@
 import useStateFromProps from "@dashboard/hooks/useStateFromProps";
 import { addAtIndex, removeAtIndex } from "@dashboard/utils/lists";
 import { GridColumn } from "@glideapps/glide-data-grid";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { PersistedColumn } from "../persistance/persistedColumn";
 import { usePersistance } from "../persistance/usePersistance";
@@ -70,6 +70,7 @@ export const useColumns = ({
     () => mergeSelectedColumns({ staticColumns, dynamicColumns, selectedColumns }),
     [dynamicColumns, staticColumns, selectedColumns],
   );
+
   const [recentlyAddedColumn, setRecentlyAddedColumn] = React.useState<string | null>(null);
   const [visibleColumns, setVisibleColumns] = useStateFromProps(initialColumnsState);
 
