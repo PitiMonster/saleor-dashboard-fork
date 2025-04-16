@@ -33,6 +33,7 @@ import { OutputData } from "@editorjs/editorjs";
 import { Option } from "@saleor/macaw-ui-next";
 
 import { ProductChannelsListingDialogSubmit } from "./ProductChannelsListingsDialog";
+import { ProductMaterialsComposition } from "./ProductMaterialsListCard/types";
 import { TSizeTable } from "./ProductSizeTableCard";
 
 export interface ProductUpdateFormData extends MetadataFormData {
@@ -68,6 +69,7 @@ export interface ProductUpdateData extends ProductUpdateFormData {
   channels: ProductChannelListingUpdateInput;
   description: OutputData;
   sizeProperties: Option[];
+  materialsComposition: ProductMaterialsComposition;
 }
 export interface ProductUpdateSubmitData extends ProductUpdateFormData {
   attributes: AttributeInput[];
@@ -77,6 +79,7 @@ export interface ProductUpdateSubmitData extends ProductUpdateFormData {
   description: OutputData;
   variants: DatagridChangeOpts;
   sizeTable: DatagridChangeOpts;
+  materialsComposition: ProductMaterialsComposition;
 }
 
 export interface ProductUpdateHandlers
@@ -91,6 +94,7 @@ export interface ProductUpdateHandlers
   selectAttributeFile: FormsetChange<File>;
   changeSizeTableData: (data: DatagridChangeOpts) => void;
   selectSizeProperties: (value: Option[]) => void;
+  selectMaterialsComposition: (value: ProductMaterialsComposition) => void;
   reorderAttributeValue: FormsetChange<ReorderEvent>;
   changeVariants: (data: DatagridChangeOpts) => void;
   fetchReferences: (value: string) => void;

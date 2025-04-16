@@ -43,6 +43,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useIntl } from "react-intl";
 
 import { useProductChannelListingsForm } from "./formChannels";
+import { ProductMaterialsComposition } from "./ProductMaterialsListCard/types";
 import { TSizeTable } from "./ProductSizeTableCard";
 import { mapSizeTableToOptions } from "./ProductSizeTableCard/utils";
 import {
@@ -108,6 +109,14 @@ export function useProductUpdateForm(
     [triggerChange],
   );
 
+  // product materials composition
+  const [materialsComposition, setMaterialsComposition] = useState<ProductMaterialsComposition>({});
+  const handleMaterialsCompositionChange = (data: ProductMaterialsComposition) => {
+    setMaterialsComposition(data);
+    triggerChange();
+  };
+
+  // size table
   const [sizeProperties, setSizeProperties] = useState<Option[]>(
     mapSizeTableToOptions(initSizeTable, intl),
   );
@@ -206,6 +215,7 @@ export function useProductUpdateForm(
     channels,
     description: null,
     sizeProperties,
+    materialsComposition,
   };
   const getSubmitData = async (): Promise<ProductUpdateSubmitData> => ({
     ...form.changedData,
@@ -224,6 +234,7 @@ export function useProductUpdateForm(
     description: richText.isDirty ? await richText.getValue() : undefined,
     variants: variants.current,
     sizeTable: sizeTable.current,
+    materialsComposition,
   });
   const handleSubmit = async (data: ProductUpdateSubmitData) => {
     const errors = await onSubmit(data);
@@ -325,6 +336,7 @@ export function useProductUpdateForm(
       selectCollection: handleCollectionSelect,
       selectTaxClass: handleTaxClassSelect,
       selectSizeProperties: handleSizePropertiesChange,
+      selectMaterialsComposition: handleMaterialsCompositionChange,
       updateChannelList: handleChannelListUpdate,
     },
     submit,

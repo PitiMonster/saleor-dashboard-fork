@@ -42,6 +42,7 @@ export const ProductSizeTableCard: React.FC<Props> = ({
   onSizePropertiesChange,
   onChangeSizeTableData,
 }) => {
+  const intl = useIntl();
   const sizes = getProductVariantClothingSizes(productVariants);
   const sizeTable = generateSizeTable(initSizeTable, sizes, sizeProperties);
 
@@ -56,7 +57,7 @@ export const ProductSizeTableCard: React.FC<Props> = ({
         flexDirection="column"
       >
         <Text size={5} fontWeight="bold">
-          Tabela rozmiarów
+          {intl.formatMessage(messages.title)}
         </Text>
         <ProductSizePropertiesSelect
           onSizePropertiesChange={onSizePropertiesChange}

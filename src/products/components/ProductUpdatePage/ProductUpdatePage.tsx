@@ -64,6 +64,8 @@ import ProductVariants from "../ProductVariants";
 import ProductUpdateForm from "./form";
 import { messages } from "./messages";
 import ProductChannelsListingsDialog from "./ProductChannelsListingsDialog";
+import { ProductMaterialsListCard } from "./ProductMaterialsListCard";
+import { ProductMaterialError } from "./ProductMaterialsListCard/types";
 import { ProductSizeTableCard, TSizeTable } from "./ProductSizeTableCard";
 import { ProductUpdateData, ProductUpdateHandlers, ProductUpdateSubmitData } from "./types";
 
@@ -221,6 +223,11 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
       ) as Array<ProductErrorFragment | ProductChannelListingErrorFragment>,
     [errors, channelsErrors],
   );
+  const productMaterialsCompositionErrors = React.useMemo(
+    () =>
+      errors.filter(error => error.__typename === "ProductMaterialError") as ProductMaterialError[],
+    [errors],
+  );
   const extensionMenuItems = mapToMenuItemsForProductDetails(
     PRODUCT_DETAILS_MORE_ACTIONS,
     productId,
@@ -340,6 +347,13 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
                   fetchMoreAttributeValues={fetchMoreAttributeValues!}
                   onAttributeSelectBlur={onAttributeSelectBlur}
                   richTextGetters={attributeRichTextGetters}
+                />
+              )}
+              {isProductTypeClothes && (
+                <ProductMaterialsListCard
+                  materialsComposition={data.materialsComposition}
+                  errors={productMaterialsCompositionErrors}
+                  onChange={handlers.selectMaterialsComposition}
                 />
               )}
               {isProductTypeClothes && (
