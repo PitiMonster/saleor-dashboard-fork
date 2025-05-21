@@ -66,11 +66,12 @@ import { messages } from "./messages";
 import ProductChannelsListingsDialog from "./ProductChannelsListingsDialog";
 import { ProductMaterialsListCard } from "./ProductMaterialsListCard";
 import { ProductMaterialError } from "./ProductMaterialsListCard/types";
-import { ProductSizeTableCard, TSizeTable } from "./ProductSizeTableCard";
+import { ProductSizeTableCard } from "./ProductSizeTableCard";
+import { ProductSizeTableError } from "./ProductSizeTableCard/types";
 import { ProductUpdateData, ProductUpdateHandlers, ProductUpdateSubmitData } from "./types";
 
 interface StylkaProps {
-  sizeTable: TSizeTable;
+  productSizeTableErrors: ProductSizeTableError[];
 }
 
 export interface ProductUpdatePageProps extends StylkaProps {
@@ -167,7 +168,7 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
   refetch,
   onCloseDialog,
   onAttributeSelectBlur,
-  sizeTable,
+  productSizeTableErrors,
 }) => {
   const intl = useIntl();
   const navigate = useNavigator();
@@ -266,7 +267,6 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
       assignReferencesAttributeId={assignReferencesAttributeId}
       disabled={disabled}
       refetch={refetch}
-      sizeTable={sizeTable}
     >
       {({ change, data, handlers, submit, isSaveDisabled, attributeRichTextGetters }) => {
         const availabilityCommonProps = {
@@ -358,8 +358,8 @@ export const ProductUpdatePage: React.FC<ProductUpdatePageProps> = ({
               )}
               {isProductTypeClothes && (
                 <ProductSizeTableCard
-                  initSizeTable={sizeTable}
-                  productVariants={variants}
+                  initSizeTable={data.sizeTable}
+                  errors={productSizeTableErrors}
                   sizeProperties={data.sizeProperties}
                   onSizePropertiesChange={handlers.selectSizeProperties}
                   onChangeSizeTableData={handlers.changeSizeTableData}

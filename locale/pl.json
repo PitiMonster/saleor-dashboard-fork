@@ -9591,5 +9591,17 @@
   "vBPm7g": {
     "string": "Dodaj materiał",
     "context": "Add material button"
+  },
+  "QdhgFO": {
+    "string": "Nie podano wymiaru produktu",
+    "context": "Size table value is required"
+  },
+  "oqi+AF": {
+    "string": "rozmiar",
+    "context": "Size"
+  },
+  "2nHvaR": {
+    "string": "wymiar",
+    "context": "Dimension"
   }
 }

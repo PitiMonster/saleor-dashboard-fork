@@ -1,6 +1,6 @@
 import { BasicAttributeRow } from "@dashboard/components/Attributes/BasicAttributeRow";
 import { Box, convertSizeToScale, Input, Multiselect, Option, Text } from "@saleor/macaw-ui-next";
-import React from "react";
+import React, { useEffect } from "react";
 import { useIntl } from "react-intl";
 
 import messages from "./messages";
@@ -23,11 +23,25 @@ export const ProductMaterialsListCard: React.FC<Props> = ({
   onChange,
 }) => {
   const intl = useIntl();
-  const [selectedMaterials, setSelectedMaterials] = React.useState<Option[]>([]);
+  const [selectedMaterials, setSelectedMaterials] = React.useState<Option[]>(
+    materialsComposition
+      ? Object.keys(materialsComposition).map(material => ({
+          label: mapProductMaterialToMessage(intl, material as ProductMaterialEnum),
+          value: material,
+        }))
+      : [],
+  );
+
+  useEffect(() => {
+    const newSelectedMaterials = Object.keys(materialsComposition).map(material => ({
+      label: mapProductMaterialToMessage(intl, material as ProductMaterialEnum),
+      value: material,
+    }));
+
+    setSelectedMaterials(newSelectedMaterials);
+  }, [materialsComposition, intl]);
 
   const handleSelectedMaterialsChange = (materials: Option[]) => {
-    setSelectedMaterials(materials);
-
     const newMaterialsComposition: ProductMaterialsComposition = materials.reduce(
       (acc, material) => ({
         ...acc,
@@ -117,7 +131,7 @@ const ProductMaterialValueList: React.FC<
 
         const value = materialsComposition[material as ProductMaterialEnum];
 
-        if (!value) {
+        if (value === undefined) {
           return [];
         }
 
