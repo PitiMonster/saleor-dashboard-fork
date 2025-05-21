@@ -13,7 +13,6 @@ import {
   ProductVariantBulkUpdateInput,
   VariantAttributeFragment,
 } from "@dashboard/graphql";
-import { TSizeTable } from "@dashboard/products/components/ProductUpdatePage/ProductSizeTableCard/types";
 import { ProductUpdateSubmitData } from "@dashboard/products/components/ProductUpdatePage/types";
 import { getAttributeInputFromProduct } from "@dashboard/products/utils/data";
 import { getParsedDataForJsonStringField } from "@dashboard/utils/richText/misc";

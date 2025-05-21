@@ -7,7 +7,6 @@ import {
   handleDeleteMultipleAttributeValues,
   handleUploadMultipleFiles,
 } from "@dashboard/attributes/utils/handlers";
-import { DatagridChangeOpts } from "@dashboard/components/Datagrid/hooks/useDatagridChange";
 import {
   AttributeErrorFragment,
   ErrorPolicyEnum,
@@ -44,10 +43,7 @@ import {
   SizePropertyEnum,
   TSizeTable,
 } from "@dashboard/products/components/ProductUpdatePage/ProductSizeTableCard/types";
-import {
-  getProductVariantClothingSizes,
-  mapSizePropertyToMessage,
-} from "@dashboard/products/components/ProductUpdatePage/ProductSizeTableCard/utils";
+import { mapSizePropertyToMessage } from "@dashboard/products/components/ProductUpdatePage/ProductSizeTableCard/utils";
 import { ProductUpdateSubmitData } from "@dashboard/products/components/ProductUpdatePage/types";
 import { getProductErrorMessage } from "@dashboard/utils/errors";
 import createMetadataUpdateHandler from "@dashboard/utils/handlers/metadataUpdateHandler";

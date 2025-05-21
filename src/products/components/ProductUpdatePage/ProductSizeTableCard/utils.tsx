@@ -1,10 +1,6 @@
 // @ts-strict-ignore
 import { AvailableColumn } from "@dashboard/components/Datagrid/types";
-import {
-  ProductDetailsQuery,
-  ProductDetailsVariantFragment,
-  ProductFragment,
-} from "@dashboard/graphql";
+import { ProductDetailsVariantFragment, ProductFragment } from "@dashboard/graphql";
 import { Option } from "@saleor/macaw-ui-next";
 import { IntlShape } from "react-intl";
 
